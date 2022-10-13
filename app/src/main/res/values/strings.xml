@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Business Card</string>
+    <string name="name">Kevin Jonathan</string>
+    <string name="role">Mobile Development Engineer</string>
+    <string name="phone">+62 813 5844 3040</string>
+    <string name="instagram">\@kevinjo30_</string>
+    <string name="email">kevinjonathan3010@gmail.com</string>
+</resources>
