@@ -5,23 +5,27 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.primarySurface
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.businesscard.ui.theme.BusinessCardTheme
-import org.intellij.lang.annotations.JdkConstants
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +35,9 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color.Green
+                    color = MaterialTheme.colors.primaryVariant
                 ) {
-                    Column {
+                    Box {
                         MainInfo()
                         ContactInfo()
                     }
@@ -52,7 +56,8 @@ fun MainInfo() {
             .fillMaxWidth()
             .fillMaxHeight()
             .wrapContentWidth(Alignment.CenterHorizontally)
-            .wrapContentHeight(Alignment.CenterVertically)
+            .wrapContentHeight(Alignment.CenterVertically),
+        horizontalAlignment = CenterHorizontally
     ) {
         Image(
             painter = image,
@@ -60,8 +65,16 @@ fun MainInfo() {
             modifier = Modifier
                 .fillMaxWidth(0.5f)
         )
-        Text(text = stringResource(R.string.name))
-        Text(text = stringResource(R.string.role))
+        Text(
+            text = stringResource(R.string.name),
+            fontSize = 24.sp,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = stringResource(R.string.role),
+            fontSize = 18.sp
+        )
     }
 }
 
@@ -73,10 +86,23 @@ fun ContactInfo() {
             .fillMaxHeight()
             .wrapContentWidth(Alignment.CenterHorizontally)
             .wrapContentHeight(Alignment.Bottom)
+            .padding(bottom = 24.dp)
     ) {
-        Text(text = stringResource(R.string.phone))
-        Text(text = stringResource(R.string.instagram))
-        Text(text = stringResource(R.string.email))
+        ContactItem(Icons.Filled.Phone, stringResource(R.string.phone))
+        ContactItem(Icons.Filled.Home, stringResource(R.string.instagram))
+        ContactItem(Icons.Filled.Email, stringResource(R.string.email))
+    }
+}
+
+@Composable
+fun ContactItem(icon: ImageVector, text: String) {
+    Row {
+        Icon(icon, contentDescription = "")
+        Spacer(
+            modifier = Modifier
+                .width(12.dp)
+        )
+        Text(text = text)
     }
 }
 
